@@ -1,0 +1,14 @@
+name: english_words
+description: Utilities for working with English words.
+version: 0.0.1
+author: Filip Hracek <filip.hracek@gmail.com>
+#homepage: https://www.example.com
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  string_scanner: ^1.0.1
+
+dev_dependencies:
+  test: '>=0.12.0 <0.13.0'

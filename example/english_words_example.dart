@@ -4,5 +4,5 @@
 import 'package:english_words/english_words.dart';
 
 void main() {
-  generateCombo(top: 50).forEach(print);
+  generateCombo().forEach(print);
 }

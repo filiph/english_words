@@ -26,7 +26,7 @@ linter:
     - library_names
     - library_prefixes
     - list_remove_unrelated_type
-    - literal_only_boolean_expressions
+#    - literal_only_boolean_expressions
     - non_constant_identifier_names
     - one_member_abstracts
     - only_throw_errors

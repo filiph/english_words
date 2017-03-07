@@ -4,4 +4,8 @@
 /// Support for working with English text.
 library english_words;
 
+export 'src/combos.dart';
 export 'src/syllables.dart';
+export 'src/words/adjectives.dart';
+export 'src/words/all.dart';
+export 'src/words/nouns.dart';

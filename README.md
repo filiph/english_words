@@ -1,6 +1,6 @@
 # english_words
 
-![Build status](https://travis-ci.org/filiph/english_words.svg)
+[![Build status](https://travis-ci.org/filiph/english_words.svg)](https://travis-ci.org/filiph/english_words)
 
 A package containing the most ~5000 used English words and some utility
 functions.

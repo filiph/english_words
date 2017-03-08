@@ -11,9 +11,11 @@ final RegExp _allCaps = new RegExp(r'^[A-Z]+$');
 
 final RegExp _alpha = new RegExp(r"\w");
 
-final RegExp _vowels = new RegExp(r"[aeiouy]+", caseSensitive: false);
+final RegExp _vowel = new RegExp(r"[aeiouy]", caseSensitive: false);
 
 /// Count syllables in [word].
+///
+/// Heavily inspired by https://github.com/wooorm/syllable.
 int syllables(String word) {
   assert(
       new RegExp(r'^\w+$').hasMatch(word),
@@ -31,7 +33,7 @@ int syllables(String word) {
   if (problematicCount != null) {
     return problematicCount;
   }
-  // TODO: if this is plural, make it singular
+  // TODO: if this is plural, make it singular and try again with problematic
 
   int count = 0;
 
@@ -43,28 +45,46 @@ int syllables(String word) {
     });
   }
 
-  String unprefixed = adjust(word, trisyllabicPrefixSuffix, 3);
-  unprefixed = adjust(unprefixed, disyllabicPrefixSuffix, 2);
-  unprefixed = adjust(unprefixed, monosyllabicPrefixSuffix, 1);
+  // We have to chop off prefixes (like 'afore' or 'hyper') and suffixes
+  // (like 'ment' or 'ology') so that we can than scan only the "root"
+  // of the word. For example, "abatement" becomes "abate" (-ment), which
+  // ends with "-ate", which looks like 2 syllables but actualy is just one
+  // (which is covered by [monosyllabic2] below).
+  String wordRoot = adjust(word, trisyllabicPrefixSuffix, 3);
+  wordRoot = adjust(wordRoot, disyllabicPrefixSuffix, 2);
+  wordRoot = adjust(wordRoot, monosyllabicPrefixSuffix, 1);
 
-  final scanner = new StringScanner(unprefixed);
+  final scanner = new StringScanner(wordRoot);
+
+  bool precedingVowel = false;
 
   while (!scanner.isDone) {
-    if (scanner.scan(_vowels)) {
+    if (scanner.matches(monosyllabic1) || scanner.matches(monosyllabic2)) {
+      // The following should count for one less than what it looks like
+      // from vowels and consonants alone.
+      count -= 1;
+    }
+
+    if (scanner.matches(disyllabic1) ||
+        scanner.matches(disyllabic2) ||
+        scanner.matches(disyllabic3) ||
+        scanner.matches(disyllabic4)) {
+      // The following should count for one more than what it looks like
+      // from vowels and consonants alone.
       count += 1;
+    }
+
+    if (scanner.scan(_vowel)) {
+      if (!precedingVowel) {
+        count += 1;
+      }
+      precedingVowel = true;
       continue;
     }
 
     scanner.expect(_alpha);
+    precedingVowel = false;
   }
-
-  adjust(unprefixed, monosyllabic1, -1);
-  adjust(unprefixed, monosyllabic2, -1);
-
-  adjust(unprefixed, disyllabic1, 1);
-  adjust(unprefixed, disyllabic2, 1);
-  adjust(unprefixed, disyllabic3, 1);
-  adjust(unprefixed, disyllabic4, 1);
 
   if (count == 0) return 1;
   return count;

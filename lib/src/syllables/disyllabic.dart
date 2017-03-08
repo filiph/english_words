@@ -67,7 +67,7 @@ final disyllabic1 = new RegExp(
 
 var disyllabic2 = new RegExp(
     '[^gq]ua[^auieo]|' +
-        '[aeiou]{3}|' +
+        r'[aeiou]{3}([^aeiou]|$)|' +
         '^(' +
         'ia|' +
         'mc|' +

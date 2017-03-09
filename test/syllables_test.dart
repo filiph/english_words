@@ -69,6 +69,15 @@ void main() {
       test('flying', () {
         expect(syllables('flying'), 2);
       });
+      test('poet', () {
+        expect(syllables('poet'), 2);
+      });
+      test('conscious', () {
+        expect(syllables('conscious'), 2);
+      });
+      test('precious', () {
+        expect(syllables('precious'), 2);
+      });
     });
 
     group("todo: ", () {

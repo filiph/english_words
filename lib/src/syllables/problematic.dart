@@ -22,6 +22,7 @@ Map<String, int> problematic = {
   "chloe": 2,
   "circe": 2,
   "coyote": 3,
+  "conscious": 2,
   "epitome": 4,
   "forever": 3,
   "gethsemane": 4,
@@ -33,6 +34,7 @@ Map<String, int> problematic = {
   "machete": 3,
   "maybe": 2,
   "people": 2,
+  "poet": 2,
   "recipe": 3,
   "sesame": 3,
   "shoreline": 2,
@@ -47,5 +49,6 @@ Map<String, int> problematic = {
   "penelope": 4,
   "persephone": 4,
   "phoebe": 2,
+  "precious": 2,
   "zoe": 2
 };

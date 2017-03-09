@@ -61,6 +61,7 @@ final disyllabic1 = new RegExp(
         'oa|' +
         'ua|' +
         'eings?|' +
+        '[dl]ying|' +
         '[aeiouy]sh?e[rsd]' +
         r')$',
     caseSensitive: false);

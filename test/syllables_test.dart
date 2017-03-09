@@ -63,6 +63,12 @@ void main() {
       test('monologue', () {
         expect(syllables('monologue'), 3);
       });
+      test('dying', () {
+        expect(syllables('dying'), 2);
+      });
+      test('flying', () {
+        expect(syllables('flying'), 2);
+      });
     });
 
     group("todo: ", () {

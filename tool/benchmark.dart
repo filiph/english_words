@@ -23,7 +23,27 @@ class SyllableBenchmark extends BenchmarkBase {
   }
 }
 
+/// A benchmark for counting syllables.
+class GenerateWordPairBenchmark extends BenchmarkBase {
+  /// Create the benchmark.
+  GenerateWordPairBenchmark() : super("GenerateWordPair");
+
+  /// Run and report on the benchmark.
+  static void main() {
+    new GenerateWordPairBenchmark().report();
+  }
+
+  /// Generate 100 random [WordPair]s and count cumulative length.
+  @override
+  void run() {
+    int length = 0;
+    for (var pair in generateWordPairs().take(100)) {
+      length += pair.first.length + pair.second.length;
+    }
+  }
+}
+
 void main() {
-  // Run TemplateBenchmark
   SyllableBenchmark.main();
+  GenerateWordPairBenchmark.main();
 }

@@ -3,10 +3,11 @@ import 'dart:math';
 import 'package:english_words/src/syllables.dart';
 import 'package:english_words/src/words/adjectives.dart';
 import 'package:english_words/src/words/nouns.dart';
+import 'package:english_words/src/words/unsafe.dart';
 
 final _random = new Random();
 
-/// Randomly generates nice-sounding combinations of words.
+/// Randomly generates nice-sounding combinations of words (compounds).
 ///
 /// Will only return word combinations that are [maxSyllables] long. This
 /// applies to the joined word, so that, for example, `timetime` will not pass
@@ -17,14 +18,22 @@ final _random = new Random();
 /// words in the database ([adjectives] and [nouns]). You can tighten it by
 /// providing [top]. For example, when [top] is `10`, then only the top ten
 /// adjectives and nouns will be used for generating the combinations.
-Iterable<WordPair> generateCombo({int maxSyllables: 2, int top: 10000}) sync* {
-  bool filter(String word) => syllables(word) <= maxSyllables - 1;
+///
+/// By default, the generator will not output possibly offensive compounds,
+/// such as 'ballsack' or anything containing 'Jew'. You can turn this behavior
+/// off by setting [safeOnly] to `false`.
+Iterable<WordPair> generateWordPairs(
+    {int maxSyllables: 2, int top: 10000, bool safeOnly: true}) sync* {
+  bool filterWord(String word) {
+    if (safeOnly && unsafe.contains(word)) return false;
+    return syllables(word) <= maxSyllables - 1;
+  }
 
   final shortAdjectives = adjectives
-      .where(filter)
+      .where(filterWord)
       .take(top)
       .toList(growable: false)..shuffle(_random);
-  final shortNouns = nouns.where(filter).take(top).toList(growable: false)
+  final shortNouns = nouns.where(filterWord).take(top).toList(growable: false)
     ..shuffle(_random);
 
   int adjectivesIndex = 0;
@@ -54,6 +63,9 @@ Iterable<WordPair> generateCombo({int maxSyllables: 2, int top: 10000}) sync* {
     // Skip combinations that clash same letters.
     if (prefix.codeUnits.last == suffix.codeUnits.first) continue;
 
+    // Skip combinations that create an unsafe combinations.
+    if (safeOnly && unsafePairs.contains("$prefix$suffix")) continue;
+
     final wordPair = new WordPair(prefix, suffix);
     // Skip words that don't make a nicely pronounced 2-syllable word
     // when combined together.
@@ -63,6 +75,9 @@ Iterable<WordPair> generateCombo({int maxSyllables: 2, int top: 10000}) sync* {
 }
 
 /// Representation of a combination of 2 words, [first] and [second].
+///
+/// This is can be also described as a two-part compound (in the linguistic
+/// sense of the word). https://en.wikipedia.org/wiki/Compound_(linguistics)
 ///
 /// For example, 'Skyrim' is a word pair, where 'sky' is the first part
 /// and 'rim' is the second.

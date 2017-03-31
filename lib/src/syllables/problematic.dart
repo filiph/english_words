@@ -23,6 +23,7 @@ Map<String, int> problematic = {
   "circe": 2,
   "coyote": 3,
   "conscious": 2,
+  "cruel": 2,
   "epitome": 4,
   "forever": 3,
   "gethsemane": 4,

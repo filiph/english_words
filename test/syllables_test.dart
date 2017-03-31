@@ -78,6 +78,9 @@ void main() {
       test('precious', () {
         expect(syllables('precious'), 2);
       });
+      test('cruel', () {
+        expect(syllables('cruel'), 2);
+      });
     });
 
     group("todo: ", () {

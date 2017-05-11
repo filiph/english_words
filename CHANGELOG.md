@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+- Add 'AIDS' to unsafe words
+
 ## 2.0.1
 
 - Update README with refactor to `generateWordPairs`

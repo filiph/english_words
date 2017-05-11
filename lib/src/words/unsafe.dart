@@ -7,7 +7,14 @@
 /// perfectly innocent word, but it will be filtered with [unsafe]). That is
 /// preferred to false negatives, where offensive words or word pairs
 /// are offered to the user.
-const List<String> unsafe = const ['ass', 'fucking', 'gay', 'Jew', 'shit'];
+const List<String> unsafe = const [
+  'AIDS',
+  'ass',
+  'fucking',
+  'gay',
+  'Jew',
+  'shit'
+];
 
 /// Lists combinations of perfectly innocent words that together create
 /// a nasty one.

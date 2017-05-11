@@ -23,10 +23,10 @@ Computing number of syllables in a word:
 
 Generating 5 interesting 2-syllable word combinations:
 
-    generateCombo().take(5).forEach(print);
+    generateWordPairs().take(5).forEach(print);
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: https://github.com/filiph/english_words/issues

@@ -13,6 +13,7 @@ const List<String> unsafe = const [
   'fucking',
   'gay',
   'Jew',
+  'rape',
   'shit'
 ];
 

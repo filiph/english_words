@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3
+
+- Add 'rape' to unsafe words
+
 ## 2.0.2
 
 - Add 'AIDS' to unsafe words

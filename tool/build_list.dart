@@ -3,7 +3,7 @@ import 'dart:io';
 /// Gets a subset of the input CSV.
 ///
 /// * n (child, world)
-/// * j (good, new old)
+/// * j (good, new, old)
 /// * r (how, more, then, really)
 /// * p (we, she)
 /// * m (first, million)

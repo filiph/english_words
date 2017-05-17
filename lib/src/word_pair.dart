@@ -2,8 +2,22 @@ import 'dart:math';
 
 import 'package:english_words/src/syllables.dart';
 import 'package:english_words/src/words/adjectives.dart';
+import 'package:english_words/src/words/adjectives_monosyllabic_safe.dart';
 import 'package:english_words/src/words/nouns.dart';
+import 'package:english_words/src/words/nouns_monosyllabic_safe.dart';
 import 'package:english_words/src/words/unsafe.dart';
+
+/// The default value of the `maxSyllables` parameter of the [generateWordPairs]
+/// function.
+const int maxSyllablesDefault = 2;
+
+/// The default value of the `safeOnly` parameter of the [generateWordPairs]
+/// function.
+const bool safeOnlyDefault = true;
+
+/// The default value of the `top` parameter of the [generateWordPairs]
+/// function.
+const int topDefault = 10000;
 
 final _random = new Random();
 
@@ -23,42 +37,40 @@ final _random = new Random();
 /// such as 'ballsack' or anything containing 'Jew'. You can turn this behavior
 /// off by setting [safeOnly] to `false`.
 Iterable<WordPair> generateWordPairs(
-    {int maxSyllables: 2, int top: 10000, bool safeOnly: true}) sync* {
+    {int maxSyllables: maxSyllablesDefault,
+    int top: topDefault,
+    bool safeOnly: safeOnlyDefault}) sync* {
   bool filterWord(String word) {
     if (safeOnly && unsafe.contains(word)) return false;
     return syllables(word) <= maxSyllables - 1;
   }
 
-  final shortAdjectives = adjectives
-      .where(filterWord)
-      .take(top)
-      .toList(growable: false)..shuffle(_random);
-  final shortNouns = nouns.where(filterWord).take(top).toList(growable: false)
-    ..shuffle(_random);
+  List<String> shortAdjectives;
+  List<String> shortNouns;
+  if (maxSyllables == maxSyllablesDefault &&
+      top == topDefault &&
+      safeOnly == safeOnlyDefault) {
+    // The most common, precomputed case.
+    shortAdjectives = adjectivesMonosyllabicSafe;
+    shortNouns = nounsMonosyllabicSafe;
+  } else {
+    shortAdjectives =
+        adjectives.where(filterWord).take(top).toList(growable: false);
+    shortNouns = nouns.where(filterWord).take(top).toList(growable: false);
+  }
 
-  int adjectivesIndex = 0;
-  int nounIndex = 0;
+  String pickRandom(List<String> list) => list[_random.nextInt(list.length)];
 
   // We're in a sync* function, so `while (true)` is okay.
   // ignore: literal_only_boolean_expressions
   while (true) {
-    if (adjectivesIndex >= shortAdjectives.length) {
-      shortAdjectives.shuffle(_random);
-      adjectivesIndex = 0;
-    }
-    // Rotate nouns when we're one element before the end of the list.
-    // `nounIndex` can be incremented by 2 in each iteration.
-    if (nounIndex >= shortNouns.length - 1) {
-      shortNouns.shuffle(_random);
-      nounIndex = 0;
-    }
     String prefix;
     if (_random.nextBool()) {
-      prefix = shortAdjectives[adjectivesIndex++];
+      prefix = pickRandom(shortAdjectives);
     } else {
-      prefix = shortNouns[nounIndex++];
+      prefix = pickRandom(shortNouns);
     }
-    final suffix = shortNouns[nounIndex++];
+    final suffix = pickRandom(shortNouns);
 
     // Skip combinations that clash same letters.
     if (prefix.codeUnits.last == suffix.codeUnits.first) continue;

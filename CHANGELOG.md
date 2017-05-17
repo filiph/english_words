@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.4
+
+- Make `generateWordPairs` 10-20x faster for the most common use case 
+  (i.e. running the function with all named parameters at default values).
+
 ## 2.0.3
 
 - Add 'rape' to unsafe words

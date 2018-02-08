@@ -1,5 +1,5 @@
-/* Expression to match double syllable pre- and suffixes. */
-final disyllabicPrefixSuffix = new RegExp(
+/// Expression to match double syllable pre- and suffixes.
+final RegExp disyllabicPrefixSuffix = new RegExp(
     '^' +
         '(' +
         'above|' +
@@ -33,12 +33,11 @@ final disyllabicPrefixSuffix = new RegExp(
         'women' +
         ')' +
         r'$',
-    caseSensitive: false
-);
+    caseSensitive: false);
 
-/* Four expression of occurrences which normally would be
- * counted as one syllable, but should be counted as two. */
-final disyllabic1 = new RegExp(
+/// Part 1 of occurrences which normally would be counted as one syllable,
+/// but should be counted as two.
+final RegExp disyllabic1 = new RegExp(
     '(' +
         '(' +
         '[^aeiouy]' +
@@ -66,7 +65,9 @@ final disyllabic1 = new RegExp(
         r')$',
     caseSensitive: false);
 
-var disyllabic2 = new RegExp(
+/// Part 2 of occurrences which normally would be counted as one syllable,
+/// but should be counted as two.
+final RegExp disyllabic2 = new RegExp(
     '[^gq]ua[^auieo]|' +
         r'[aeiou]{3}([^aeiou]|$)|' +
         '^(' +
@@ -76,7 +77,9 @@ var disyllabic2 = new RegExp(
         ')',
     caseSensitive: false);
 
-var disyllabic3 = new RegExp(
+/// Part 3 of occurrences which normally would be counted as one syllable,
+/// but should be counted as two.
+final RegExp disyllabic3 = new RegExp(
     '[^aeiou]y[ae]|' +
         '[^l]lien|' +
         'riet|' +
@@ -91,4 +94,6 @@ var disyllabic3 = new RegExp(
         '[aeiou]y[aeiou]',
     caseSensitive: false);
 
-var disyllabic4 = new RegExp(r'[^s]ia', caseSensitive: false);
+/// Part 4 of occurrences which normally would be counted as one syllable,
+/// but should be counted as two.
+final RegExp disyllabic4 = new RegExp(r'[^s]ia', caseSensitive: false);

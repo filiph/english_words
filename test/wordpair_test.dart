@@ -1,4 +1,5 @@
 import 'package:english_words/english_words.dart';
+import 'package:english_words/src/words/unsafe.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -65,4 +66,16 @@ void main() {
     expect(() => new WordPair("clear", ""), throwsArgumentError);
     expect(() => new WordPair("", "lake"), throwsArgumentError);
   });
+
+  test('generateWordPair avoids unsafe words by default', () {
+    // Since this is running a random generator, the test is inherently fuzzy.
+    // It won't give you false positives, but it might give you false negatives
+    // (i.e. test passes despite problem with the filtering mechanism).
+    // There's a 'flaky' tag so that you can skip this test.
+    final pairs = generateWordPairs().take(10000);
+    for (final pair in pairs) {
+      expect(unsafe, isNot(contains(pair.first)));
+      expect(unsafe, isNot(contains(pair.second)));
+    }
+  }, tags: ['flaky']);
 }

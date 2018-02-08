@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Fix bug that made an unsafe word get generated despite ban
+
 ## 3.0.0
 
 - BREAKING: `WordPair` constructor is no longer `const`

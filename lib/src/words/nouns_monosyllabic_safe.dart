@@ -150,7 +150,6 @@ const List<String> nounsMonosyllabicSafe = const [
   'trade',
   'deal',
   'bill',
-  'sex',
   'glass',
   'skill',
   'crime',

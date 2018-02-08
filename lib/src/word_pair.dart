@@ -100,8 +100,60 @@ class WordPair {
   /// The second part of the pair.
   final String second;
 
+  String _asPascalCase;
+
+  String _asCamelCase;
+
+  String _asLowerCase;
+
+  String _asUpperCase;
+
+  String _asString;
+
   /// Create a [WordPair] from the strings [first] and [second].
-  const WordPair(this.first, this.second);
+  WordPair(this.first, this.second) {
+    if (first == null || second == null) {
+      throw new ArgumentError("Words of WordPair cannot be null. "
+          "Received: '$first', '$second'");
+    }
+    if (first.isEmpty || second.isEmpty) {
+      throw new ArgumentError("Words of WordPair cannot be empty. "
+          "Received: '$first', '$second'");
+    }
+  }
+
+  /// Returns the word pair as a simple string, with second word capitalized,
+  /// like `"keyFrame"` or `"franceLand"`. This is informally called
+  /// "camel case".
+  String get asCamelCase => _asCamelCase ??= _createCamelCase();
+
+  /// Returns the word pair as a simple string, in lower case,
+  /// like `"keyframe"` or `"franceland"`.
+  String get asLowerCase => _asLowerCase ??= asString.toLowerCase();
+
+  /// Returns the word pair as a simple string, with each word capitalized,
+  /// like `"KeyFrame"` or `"BigUsa"`. This is informally called "pascal case".
+  String get asPascalCase => _asPascalCase ??= _createPascalCase();
+
+  /// Returns the word pair as a simple string, like `"keyframe"`
+  /// or `"bigFrance"`.
+  String get asString => _asString ??= '$first$second';
+
+  /// Returns the word pair as a simple string, in upper case,
+  /// like `"KEYFRAME"` or `"FRANCELAND"`.
+  String get asUpperCase => _asUpperCase ??= asString.toUpperCase();
+
+  @override
+  int get hashCode => asString.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is WordPair) {
+      return first == other.first && second == other.second;
+    } else {
+      return false;
+    }
+  }
 
   /// Returns a string representation of the [WordPair] where the two parts
   /// are joined by [separator].
@@ -114,5 +166,13 @@ class WordPair {
       new WordPair(first.toLowerCase(), second.toLowerCase());
 
   @override
-  String toString() => '$first$second';
+  String toString() => asString;
+
+  String _capitalize(String word) {
+    return "${word[0].toUpperCase()}${word.substring(1).toLowerCase()}";
+  }
+
+  String _createCamelCase() => "${first.toLowerCase()}${_capitalize(second)}";
+
+  String _createPascalCase() => "${_capitalize(first)}${_capitalize(second)}";
 }

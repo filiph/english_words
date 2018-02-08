@@ -1,4 +1,12 @@
-# Changelog
+## 3.0.0
+
+- BREAKING: `WordPair` constructor is no longer `const`
+- BREAKING: `WordPair` will reject words that are `null` or empty
+- Add `.asCamelCase`, `.asPascalCase`, `.asLowerCase` and `.asUpperCase` getters
+  to `WordPair`. These are memoized, so they're faster to access.
+- Add 'sex' to unsafe words
+- Stricter strong mode turned on
+- Lints resolved
 
 ## 2.0.4
 
@@ -20,7 +28,9 @@
 ## 2.0.0
 
 - The `generateCombo()` function has been renamed to `generateWordPairs()`
-- `generateWordPairs()` takes a `safeOnly` named argument. If set to `true` (default), it will avoid wordpairs like "ballsack" or anything containing "ass", "shit", "fucking", etc.
+- `generateWordPairs()` takes a `safeOnly` named argument. If set to 
+  `true` (default), it will avoid wordpairs like "ballsack" or anything 
+  containing "ass", "shit", "fucking", etc.
 - Add benchmark for `GenerateWordPair()`
 - Add exception for "cruel"
 

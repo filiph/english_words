@@ -1,4 +1,4 @@
-/// Lists nasty and otherwise unsafewords that are contained in `all.dart`.
+/// Lists nasty and otherwise unsafe words that are contained in `all.dart`.
 ///
 /// The list is sorted alphabetically. Most of the really bad words are already
 /// missing from `all`, so this just finishes the job.
@@ -14,6 +14,7 @@ const List<String> unsafe = const [
   'gay',
   'Jew',
   'rape',
+  'sex',
   'shit'
 ];
 

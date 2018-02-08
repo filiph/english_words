@@ -7,6 +7,9 @@
 /// perfectly innocent word, but it will be filtered with [unsafe]). That is
 /// preferred to false negatives, where offensive words or word pairs
 /// are offered to the user.
+///
+/// *IMPORTANT*: When adding to this list, edit also
+/// `adjectivesMonosyllabicSafe` and `nounsMonosyllabicSafe`.
 const List<String> unsafe = const [
   'AIDS',
   'ass',

@@ -1,3 +1,9 @@
+## 3.1.0
+
+- Allow injecting `Random` to `generateWordPairs()`
+- Add `WordPair.random()` constructor for easier creation of a single
+  word combo
+
 ## 3.0.1
 
 - Fix bug that made an unsafe word get generated despite ban

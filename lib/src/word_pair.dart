@@ -127,6 +127,26 @@ class WordPair {
     }
   }
 
+  /// Creates a single [WordPair] randomly. Takes the same parameters as
+  /// [generateWordPairs].
+  ///
+  /// If you need more than one word pair, this constructor will be inefficient.
+  /// Get an iterable of random word pairs instead by calling
+  /// [generateWordPairs].
+  factory WordPair.random(
+      {int maxSyllables: maxSyllablesDefault,
+      int top: topDefault,
+      bool safeOnly: safeOnlyDefault,
+      Random random}) {
+    random ??= _random;
+    final pairsIterable = generateWordPairs(
+        maxSyllables: maxSyllables,
+        top: top,
+        safeOnly: safeOnly,
+        random: random);
+    return pairsIterable.first;
+  }
+
   /// Returns the word pair as a simple string, with second word capitalized,
   /// like `"keyFrame"` or `"franceLand"`. This is informally called
   /// "camel case".

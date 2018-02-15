@@ -57,6 +57,10 @@ void main() {
     expect(d.asUpperCase, "HUGEA");
   });
 
+  test('WordPair.random returns normally', () {
+    expect(() => new WordPair.random(), returnsNormally);
+  });
+
   test('WordPair throws on null members', () {
     expect(() => new WordPair("clear", null), throwsArgumentError);
     expect(() => new WordPair(null, "lake"), throwsArgumentError);

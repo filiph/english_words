@@ -36,10 +36,15 @@ final _random = new Random();
 /// By default, the generator will not output possibly offensive compounds,
 /// such as 'ballsack' or anything containing 'Jew'. You can turn this behavior
 /// off by setting [safeOnly] to `false`.
+///
+/// You can inject [Random] using the [random] parameter.
 Iterable<WordPair> generateWordPairs(
     {int maxSyllables: maxSyllablesDefault,
     int top: topDefault,
-    bool safeOnly: safeOnlyDefault}) sync* {
+    bool safeOnly: safeOnlyDefault,
+    Random random}) sync* {
+  random ??= _random;
+
   bool filterWord(String word) {
     if (safeOnly && unsafe.contains(word)) return false;
     return syllables(word) <= maxSyllables - 1;
@@ -59,13 +64,13 @@ Iterable<WordPair> generateWordPairs(
     shortNouns = nouns.where(filterWord).take(top).toList(growable: false);
   }
 
-  String pickRandom(List<String> list) => list[_random.nextInt(list.length)];
+  String pickRandom(List<String> list) => list[random.nextInt(list.length)];
 
   // We're in a sync* function, so `while (true)` is okay.
   // ignore: literal_only_boolean_expressions
   while (true) {
     String prefix;
-    if (_random.nextBool()) {
+    if (random.nextBool()) {
       prefix = pickRandom(shortAdjectives);
     } else {
       prefix = pickRandom(shortNouns);

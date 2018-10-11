@@ -1,3 +1,15 @@
+## 3.1.4
+
+- Bug fix: Remove duplicates from `all`
+
+## 3.1.3
+
+- Update dependency of `pkg:test` to 1.0
+
+## 3.1.1
+
+- Allow Dart 2
+
 ## 3.1.0
 
 - Allow injecting `Random` to `generateWordPairs()`

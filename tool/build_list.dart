@@ -10,15 +10,15 @@ import 'dart:io';
 /// * d (this, that, another, same)
 /// * c (so)
 void main() {
-  final inputCsv = new File("data/word-freq-top5000.csv");
+  final inputCsv = File("data/word-freq-top5000.csv");
   final allow = ['j']; //, 'j', 'm'];
 
   for (var line in inputCsv.readAsLinesSync()) {
-    if (!line.startsWith(new RegExp(r'\d+'))) continue;
+    if (!line.startsWith(RegExp(r'\d+'))) continue;
     final parts = line.split(',');
     if (allow.contains(parts[2])) {
       final word = parts[1];
-      if (!new RegExp(r'^\w+$').hasMatch(word)) {
+      if (!RegExp(r'^\w+$').hasMatch(word)) {
         // Skip words like "n't" and "o'clock".
         continue;
       }

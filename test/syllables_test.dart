@@ -102,7 +102,7 @@ void main() {
 }
 
 void _expectSyllables(Map<String, int> expectations) {
-  final failures = new Map<String, int>();
+  final failures = Map<String, int>();
   for (var word in expectations.keys) {
     if (syllables(word) != expectations[word]) {
       failures[word] = syllables(word);

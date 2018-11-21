@@ -7,18 +7,18 @@ import 'package:english_words/src/syllables/problematic.dart';
 import 'package:english_words/src/syllables/trisyllabic.dart';
 import 'package:string_scanner/string_scanner.dart';
 
-final RegExp _allCaps = new RegExp(r'^[A-Z]+$');
+final RegExp _allCaps = RegExp(r'^[A-Z]+$');
 
-final RegExp _alpha = new RegExp(r"\w");
+final RegExp _alpha = RegExp(r"\w");
 
-final RegExp _vowel = new RegExp(r"[aeiouy]", caseSensitive: false);
+final RegExp _vowel = RegExp(r"[aeiouy]", caseSensitive: false);
 
 /// Count syllables in [word].
 ///
 /// Heavily inspired by https://github.com/wooorm/syllable.
 int syllables(String word) {
   assert(
-      new RegExp(r'^\w+$').hasMatch(word),
+      RegExp(r'^\w+$').hasMatch(word),
       "Word '$word' contains non-alphabetic characters. "
       "Have you trimmed the word of whitespace?");
 
@@ -54,7 +54,7 @@ int syllables(String word) {
   wordRoot = adjust(wordRoot, disyllabicPrefixSuffix, 2);
   wordRoot = adjust(wordRoot, monosyllabicPrefixSuffix, 1);
 
-  final scanner = new StringScanner(wordRoot);
+  final scanner = StringScanner(wordRoot);
 
   bool precedingVowel = false;
 

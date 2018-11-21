@@ -2,7 +2,7 @@
 ///
 /// From
 /// https://raw.githubusercontent.com/wooorm/syllable/master/test/fixture.json
-const Map<String, int> syllableTestData = const {
+const Map<String, int> syllableTestData = {
   "abalone": 4,
   "abare": 3,
   "abatement": 3,

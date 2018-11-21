@@ -19,7 +19,7 @@ const bool safeOnlyDefault = true;
 /// function.
 const int topDefault = 10000;
 
-final _random = new Random();
+final _random = Random();
 
 /// Randomly generates nice-sounding combinations of words (compounds).
 ///
@@ -39,9 +39,9 @@ final _random = new Random();
 ///
 /// You can inject [Random] using the [random] parameter.
 Iterable<WordPair> generateWordPairs(
-    {int maxSyllables: maxSyllablesDefault,
-    int top: topDefault,
-    bool safeOnly: safeOnlyDefault,
+    {int maxSyllables = maxSyllablesDefault,
+    int top = topDefault,
+    bool safeOnly = safeOnlyDefault,
     Random random}) sync* {
   random ??= _random;
 
@@ -83,7 +83,7 @@ Iterable<WordPair> generateWordPairs(
     // Skip combinations that create an unsafe combinations.
     if (safeOnly && unsafePairs.contains("$prefix$suffix")) continue;
 
-    final wordPair = new WordPair(prefix, suffix);
+    final wordPair = WordPair(prefix, suffix);
     // Skip words that don't make a nicely pronounced 2-syllable word
     // when combined together.
     if (syllables(wordPair.join()) > maxSyllables) continue;
@@ -118,11 +118,11 @@ class WordPair {
   /// Create a [WordPair] from the strings [first] and [second].
   WordPair(this.first, this.second) {
     if (first == null || second == null) {
-      throw new ArgumentError("Words of WordPair cannot be null. "
+      throw ArgumentError("Words of WordPair cannot be null. "
           "Received: '$first', '$second'");
     }
     if (first.isEmpty || second.isEmpty) {
-      throw new ArgumentError("Words of WordPair cannot be empty. "
+      throw ArgumentError("Words of WordPair cannot be empty. "
           "Received: '$first', '$second'");
     }
   }
@@ -134,9 +134,9 @@ class WordPair {
   /// Get an iterable of random word pairs instead by calling
   /// [generateWordPairs].
   factory WordPair.random(
-      {int maxSyllables: maxSyllablesDefault,
-      int top: topDefault,
-      bool safeOnly: safeOnlyDefault,
+      {int maxSyllables = maxSyllablesDefault,
+      int top = topDefault,
+      bool safeOnly = safeOnlyDefault,
       Random random}) {
     random ??= _random;
     final pairsIterable = generateWordPairs(
@@ -187,8 +187,7 @@ class WordPair {
   String join([String separator = '']) => '$first$separator$second';
 
   /// Creates a new [WordPair] with both parts in lower case.
-  WordPair toLowerCase() =>
-      new WordPair(first.toLowerCase(), second.toLowerCase());
+  WordPair toLowerCase() => WordPair(first.toLowerCase(), second.toLowerCase());
 
   @override
   String toString() => asString;

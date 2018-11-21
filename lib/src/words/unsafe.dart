@@ -10,7 +10,7 @@
 ///
 /// *IMPORTANT*: When adding to this list, edit also
 /// `adjectivesMonosyllabicSafe` and `nounsMonosyllabicSafe`.
-const List<String> unsafe = const [
+const List<String> unsafe = [
   'AIDS',
   'ass',
   'fucking',
@@ -26,7 +26,7 @@ const List<String> unsafe = const [
 ///
 /// Partially sourced from:
 /// http://onlineslangdictionary.com/lists/most-vulgar-words/
-const List<String> unsafePairs = const [
+const List<String> unsafePairs = [
   'babyarm',
   'ballsack',
   'furpie',

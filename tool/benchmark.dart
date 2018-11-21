@@ -25,7 +25,7 @@ class GenerateWordPairBenchmark extends BenchmarkBase {
 
   /// Run and report on the benchmark.
   static void main() {
-    new GenerateWordPairBenchmark().report();
+    GenerateWordPairBenchmark().report();
   }
 }
 
@@ -50,6 +50,6 @@ class SyllableBenchmark extends BenchmarkBase {
 
   /// Run and report on the benchmark.
   static void main() {
-    new SyllableBenchmark().report();
+    SyllableBenchmark().report();
   }
 }

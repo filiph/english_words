@@ -1,7 +1,7 @@
 /// Lists top English adjectives.
 ///
 /// The list is sorted in order of frequency of use, descending.
-const List<String> adjectives = const [
+const List<String> adjectives = [
   'other',
   'new',
   'good',

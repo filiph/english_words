@@ -1,7 +1,7 @@
 /// Lists top English nouns that are monosyllabic and safe.
 ///
 /// The list is sorted in order of frequency of use, descending.
-const List<String> nounsMonosyllabicSafe = const [
+const List<String> nounsMonosyllabicSafe = [
   'time',
   'year',
   'way',

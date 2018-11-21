@@ -4,9 +4,9 @@ import 'package:test/test.dart';
 
 void main() {
   test('WordPair has sane equality', () {
-    final a = new WordPair("key", "brain");
-    final b = new WordPair("key", "brain");
-    final c = new WordPair("key", "Brain");
+    final a = WordPair("key", "brain");
+    final b = WordPair("key", "brain");
+    final c = WordPair("key", "Brain");
     expect(a, b);
     expect(a.hashCode, b.hashCode);
     expect(a, isNot(c));
@@ -14,10 +14,10 @@ void main() {
   });
 
   test('WordPair provides PascalCase', () {
-    final a = new WordPair("clear", "lake");
-    final b = new WordPair("big", "USA");
-    final c = new WordPair("better", "PhD");
-    final d = new WordPair("huge", "a");
+    final a = WordPair("clear", "lake");
+    final b = WordPair("big", "USA");
+    final c = WordPair("better", "PhD");
+    final d = WordPair("huge", "a");
     expect(a.asPascalCase, "ClearLake");
     expect(b.asPascalCase, "BigUsa");
     expect(c.asPascalCase, "BetterPhd");
@@ -25,10 +25,10 @@ void main() {
   });
 
   test('WordPair provides camelCase', () {
-    final a = new WordPair("clear", "lake");
-    final b = new WordPair("big", "USA");
-    final c = new WordPair("France", "land");
-    final d = new WordPair("huge", "a");
+    final a = WordPair("clear", "lake");
+    final b = WordPair("big", "USA");
+    final c = WordPair("France", "land");
+    final d = WordPair("huge", "a");
     expect(a.asCamelCase, "clearLake");
     expect(b.asCamelCase, "bigUsa");
     expect(c.asCamelCase, "franceLand");
@@ -36,10 +36,10 @@ void main() {
   });
 
   test('WordPair provides lowercase', () {
-    final a = new WordPair("clear", "lake");
-    final b = new WordPair("big", "USA");
-    final c = new WordPair("France", "land");
-    final d = new WordPair("huge", "a");
+    final a = WordPair("clear", "lake");
+    final b = WordPair("big", "USA");
+    final c = WordPair("France", "land");
+    final d = WordPair("huge", "a");
     expect(a.asLowerCase, "clearlake");
     expect(b.asLowerCase, "bigusa");
     expect(c.asLowerCase, "franceland");
@@ -47,10 +47,10 @@ void main() {
   });
 
   test('WordPair provides UPPERCASE', () {
-    final a = new WordPair("clear", "lake");
-    final b = new WordPair("big", "USA");
-    final c = new WordPair("France", "land");
-    final d = new WordPair("huge", "a");
+    final a = WordPair("clear", "lake");
+    final b = WordPair("big", "USA");
+    final c = WordPair("France", "land");
+    final d = WordPair("huge", "a");
     expect(a.asUpperCase, "CLEARLAKE");
     expect(b.asUpperCase, "BIGUSA");
     expect(c.asUpperCase, "FRANCELAND");
@@ -58,17 +58,17 @@ void main() {
   });
 
   test('WordPair.random returns normally', () {
-    expect(() => new WordPair.random(), returnsNormally);
+    expect(() => WordPair.random(), returnsNormally);
   });
 
   test('WordPair throws on null members', () {
-    expect(() => new WordPair("clear", null), throwsArgumentError);
-    expect(() => new WordPair(null, "lake"), throwsArgumentError);
+    expect(() => WordPair("clear", null), throwsArgumentError);
+    expect(() => WordPair(null, "lake"), throwsArgumentError);
   });
 
   test('WordPair throws on empty members', () {
-    expect(() => new WordPair("clear", ""), throwsArgumentError);
-    expect(() => new WordPair("", "lake"), throwsArgumentError);
+    expect(() => WordPair("clear", ""), throwsArgumentError);
+    expect(() => WordPair("", "lake"), throwsArgumentError);
   });
 
   test('generateWordPair avoids unsafe words by default', () {

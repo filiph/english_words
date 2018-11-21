@@ -1,5 +1,5 @@
 /// Expression to match double syllable pre- and suffixes.
-final RegExp disyllabicPrefixSuffix = new RegExp(
+final RegExp disyllabicPrefixSuffix = RegExp(
     '^' +
         '(' +
         'above|' +
@@ -37,7 +37,7 @@ final RegExp disyllabicPrefixSuffix = new RegExp(
 
 /// Part 1 of occurrences which normally would be counted as one syllable,
 /// but should be counted as two.
-final RegExp disyllabic1 = new RegExp(
+final RegExp disyllabic1 = RegExp(
     '(' +
         '(' +
         '[^aeiouy]' +
@@ -67,7 +67,7 @@ final RegExp disyllabic1 = new RegExp(
 
 /// Part 2 of occurrences which normally would be counted as one syllable,
 /// but should be counted as two.
-final RegExp disyllabic2 = new RegExp(
+final RegExp disyllabic2 = RegExp(
     '[^gq]ua[^auieo]|' +
         r'[aeiou]{3}([^aeiou]|$)|' +
         '^(' +
@@ -79,7 +79,7 @@ final RegExp disyllabic2 = new RegExp(
 
 /// Part 3 of occurrences which normally would be counted as one syllable,
 /// but should be counted as two.
-final RegExp disyllabic3 = new RegExp(
+final RegExp disyllabic3 = RegExp(
     '[^aeiou]y[ae]|' +
         '[^l]lien|' +
         'riet|' +
@@ -96,4 +96,4 @@ final RegExp disyllabic3 = new RegExp(
 
 /// Part 4 of occurrences which normally would be counted as one syllable,
 /// but should be counted as two.
-final RegExp disyllabic4 = new RegExp(r'[^s]ia', caseSensitive: false);
+final RegExp disyllabic4 = RegExp(r'[^s]ia', caseSensitive: false);

@@ -1,5 +1,5 @@
 /// Expression to match single syllable pre- and suffixes.
-final RegExp monosyllabicPrefixSuffix = new RegExp(
+final RegExp monosyllabicPrefixSuffix = RegExp(
     '^' +
         '(' +
         'un|' +
@@ -37,7 +37,7 @@ final RegExp monosyllabicPrefixSuffix = new RegExp(
 
 /// Part 1 of expressions of occurrences which normally would
 /// be counted as two syllables, but should be counted as one.
-final RegExp monosyllabic1 = new RegExp(
+final RegExp monosyllabic1 = RegExp(
     r'cia(l|$)|' +
         'tia|' +
         'cius|' +
@@ -138,7 +138,7 @@ final RegExp monosyllabic1 = new RegExp(
 
 /// Part 2 of expressions of occurrences which normally would
 /// be counted as two syllables, but should be counted as one.
-final RegExp monosyllabic2 = new RegExp(
+final RegExp monosyllabic2 = RegExp(
     '[aeiouy]' +
         '(' +
         'b|' +

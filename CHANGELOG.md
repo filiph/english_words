@@ -1,3 +1,7 @@
+## 3.1.5
+
+- Remove optional `new` and `const`
+
 ## 3.1.4
 
 - Bug fix: Remove duplicates from `all`

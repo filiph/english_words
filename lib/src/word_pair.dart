@@ -91,6 +91,15 @@ Iterable<WordPair> generateWordPairs(
   }
 }
 
+/// Returns a string of the given word with the first letter
+/// capitalized, and all subsequent characters lowered.
+///
+/// For example, `capitalize('IM SCREAMING')` returns `Im screaming`,
+/// and `capitalize("deadpan")` returns `Deadpan`.
+String capitalize(String word) {
+  return "${word[0].toUpperCase()}${word.substring(1).toLowerCase()}";
+}
+
 /// Representation of a combination of 2 words, [first] and [second].
 ///
 /// This is can be also described as a two-part compound (in the linguistic
@@ -191,12 +200,13 @@ class WordPair {
 
   @override
   String toString() => asString;
+  
 
-  String _capitalize(String word) {
-    return "${word[0].toUpperCase()}${word.substring(1).toLowerCase()}";
+  String _createCamelCase() {
+    return "${first.toLowerCase()}${capitalize(second)}";
   }
 
-  String _createCamelCase() => "${first.toLowerCase()}${_capitalize(second)}";
-
-  String _createPascalCase() => "${_capitalize(first)}${_capitalize(second)}";
+  String _createPascalCase() {
+    return "${capitalize(first)}${capitalize(second)}";
+  }
 }

@@ -107,6 +107,8 @@ class WordPair {
 
   String _asPascalCase;
 
+  String _asSnakeCase;
+
   String _asCamelCase;
 
   String _asLowerCase;
@@ -160,6 +162,10 @@ class WordPair {
   /// like `"KeyFrame"` or `"BigUsa"`. This is informally called "pascal case".
   String get asPascalCase => _asPascalCase ??= _createPascalCase();
 
+  /// Returns the word pair as a simple string, separated by an underscore,
+  /// like `"key_frame"` or `"big_usa"`. This is informally called "snake case".
+  String get asSnakeCase => _asSnakeCase ??= _createSnakeCase();
+
   /// Returns the word pair as a simple string, like `"keyframe"`
   /// or `"bigFrance"`.
   String get asString => _asString ??= '$first$second';
@@ -199,4 +205,6 @@ class WordPair {
   String _createCamelCase() => "${first.toLowerCase()}${_capitalize(second)}";
 
   String _createPascalCase() => "${_capitalize(first)}${_capitalize(second)}";
+
+  String _createSnakeCase() => "${first}_${second}";
 }

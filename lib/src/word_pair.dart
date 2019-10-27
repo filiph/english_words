@@ -175,7 +175,7 @@ class WordPair {
   String get asUpperCase => _asUpperCase ??= asString.toUpperCase();
 
   @override
-  int get hashCode => asString.hashCode;
+  int get hashCode => (first.hashCode.toString() + second.hashCode.toString()).hashCode;
 
   @override
   bool operator ==(Object other) {

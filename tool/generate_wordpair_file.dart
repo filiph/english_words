@@ -11,7 +11,7 @@ import 'package:english_words/english_words.dart';
 ///
 ///     dart tool/generate_wordpair_file.dart 3
 void main(List<String> args) {
-  int count;
+  int? count;
   try {
     final countString = args.single;
     count = int.parse(countString);

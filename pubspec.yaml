@@ -4,7 +4,6 @@ description: >
   well-sounding word combinations, and provides access to the top 5000 English
   words by usage.
 version: 4.0.0-nullsafety.0
-author: Filip Hracek <filip.hracek@gmail.com>
 homepage: https://github.com/filiph/english_words
 
 environment:

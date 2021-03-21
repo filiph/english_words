@@ -1,3 +1,7 @@
+## 4.0.0
+
+- Null safety migration
+
 ## 3.1.5
 
 - Remove optional `new` and `const`

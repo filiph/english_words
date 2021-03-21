@@ -42,7 +42,7 @@ Iterable<WordPair> generateWordPairs(
     {int maxSyllables = maxSyllablesDefault,
     int top = topDefault,
     bool safeOnly = safeOnlyDefault,
-    Random random}) sync* {
+    Random? random}) sync* {
   random ??= _random;
 
   bool filterWord(String word) {
@@ -64,7 +64,7 @@ Iterable<WordPair> generateWordPairs(
     shortNouns = nouns.where(filterWord).take(top).toList(growable: false);
   }
 
-  String pickRandom(List<String> list) => list[random.nextInt(list.length)];
+  String pickRandom(List<String> list) => list[random!.nextInt(list.length)];
 
   // We're in a sync* function, so `while (true)` is okay.
   // ignore: literal_only_boolean_expressions
@@ -105,24 +105,20 @@ class WordPair {
   /// The second part of the pair.
   final String second;
 
-  String _asPascalCase;
+  String? _asPascalCase;
 
-  String _asSnakeCase;
+  String? _asSnakeCase;
 
-  String _asCamelCase;
+  String? _asCamelCase;
 
-  String _asLowerCase;
+  String? _asLowerCase;
 
-  String _asUpperCase;
+  String? _asUpperCase;
 
-  String _asString;
+  String? _asString;
 
   /// Create a [WordPair] from the strings [first] and [second].
   WordPair(this.first, this.second) {
-    if (first == null || second == null) {
-      throw ArgumentError("Words of WordPair cannot be null. "
-          "Received: '$first', '$second'");
-    }
     if (first.isEmpty || second.isEmpty) {
       throw ArgumentError("Words of WordPair cannot be empty. "
           "Received: '$first', '$second'");
@@ -139,7 +135,7 @@ class WordPair {
       {int maxSyllables = maxSyllablesDefault,
       int top = topDefault,
       bool safeOnly = safeOnlyDefault,
-      Random random}) {
+      Random? random}) {
     random ??= _random;
     final pairsIterable = generateWordPairs(
         maxSyllables: maxSyllables,
@@ -175,7 +171,8 @@ class WordPair {
   String get asUpperCase => _asUpperCase ??= asString.toUpperCase();
 
   @override
-  int get hashCode => (first.hashCode.toString() + second.hashCode.toString()).hashCode;
+  int get hashCode =>
+      (first.hashCode.toString() + second.hashCode.toString()).hashCode;
 
   @override
   bool operator ==(Object other) {

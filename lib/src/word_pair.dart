@@ -42,8 +42,8 @@ Iterable<WordPair> generateWordPairs(
     {int maxSyllables = maxSyllablesDefault,
     int top = topDefault,
     bool safeOnly = safeOnlyDefault,
-    Random random}) sync* {
-  random ??= _random;
+    Random? random}) sync* {
+  final rand = random ?? _random;
 
   bool filterWord(String word) {
     if (safeOnly && unsafe.contains(word)) return false;
@@ -64,13 +64,13 @@ Iterable<WordPair> generateWordPairs(
     shortNouns = nouns.where(filterWord).take(top).toList(growable: false);
   }
 
-  String pickRandom(List<String> list) => list[random.nextInt(list.length)];
+  String pickRandom(List<String> list) => list[rand.nextInt(list.length)];
 
   // We're in a sync* function, so `while (true)` is okay.
   // ignore: literal_only_boolean_expressions
   while (true) {
     String prefix;
-    if (random.nextBool()) {
+    if (rand.nextBool()) {
       prefix = pickRandom(shortAdjectives);
     } else {
       prefix = pickRandom(shortNouns);
@@ -105,24 +105,8 @@ class WordPair {
   /// The second part of the pair.
   final String second;
 
-  String _asPascalCase;
-
-  String _asSnakeCase;
-
-  String _asCamelCase;
-
-  String _asLowerCase;
-
-  String _asUpperCase;
-
-  String _asString;
-
   /// Create a [WordPair] from the strings [first] and [second].
   WordPair(this.first, this.second) {
-    if (first == null || second == null) {
-      throw ArgumentError("Words of WordPair cannot be null. "
-          "Received: '$first', '$second'");
-    }
     if (first.isEmpty || second.isEmpty) {
       throw ArgumentError("Words of WordPair cannot be empty. "
           "Received: '$first', '$second'");
@@ -139,7 +123,7 @@ class WordPair {
       {int maxSyllables = maxSyllablesDefault,
       int top = topDefault,
       bool safeOnly = safeOnlyDefault,
-      Random random}) {
+      Random? random}) {
     random ??= _random;
     final pairsIterable = generateWordPairs(
         maxSyllables: maxSyllables,
@@ -152,30 +136,31 @@ class WordPair {
   /// Returns the word pair as a simple string, with second word capitalized,
   /// like `"keyFrame"` or `"franceLand"`. This is informally called
   /// "camel case".
-  String get asCamelCase => _asCamelCase ??= _createCamelCase();
+  late final String asCamelCase = _createCamelCase();
 
   /// Returns the word pair as a simple string, in lower case,
   /// like `"keyframe"` or `"franceland"`.
-  String get asLowerCase => _asLowerCase ??= asString.toLowerCase();
+  late final String asLowerCase = asString.toLowerCase();
 
   /// Returns the word pair as a simple string, with each word capitalized,
   /// like `"KeyFrame"` or `"BigUsa"`. This is informally called "pascal case".
-  String get asPascalCase => _asPascalCase ??= _createPascalCase();
+  late final String asPascalCase = _createPascalCase();
 
   /// Returns the word pair as a simple string, separated by an underscore,
   /// like `"key_frame"` or `"big_usa"`. This is informally called "snake case".
-  String get asSnakeCase => _asSnakeCase ??= _createSnakeCase();
+  late final String asSnakeCase = _createSnakeCase();
 
   /// Returns the word pair as a simple string, like `"keyframe"`
   /// or `"bigFrance"`.
-  String get asString => _asString ??= '$first$second';
+  late final String asString = '$first$second';
 
   /// Returns the word pair as a simple string, in upper case,
   /// like `"KEYFRAME"` or `"FRANCELAND"`.
-  String get asUpperCase => _asUpperCase ??= asString.toUpperCase();
+  late final String asUpperCase = asString.toUpperCase();
 
   @override
-  int get hashCode => (first.hashCode.toString() + second.hashCode.toString()).hashCode;
+  int get hashCode =>
+      (first.hashCode.toString() + second.hashCode.toString()).hashCode;
 
   @override
   bool operator ==(Object other) {

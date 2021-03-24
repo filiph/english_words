@@ -1,3 +1,7 @@
+## 4.0.0
+
+- Bump null safety to stable
+
 ## 4.0.0-nullsafety.0
 
 - Migrate to null safety

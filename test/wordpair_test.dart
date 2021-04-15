@@ -35,6 +35,17 @@ void main() {
     expect(d.asCamelCase, "hugeA");
   });
 
+  test('WordPair provides snake_case', () {
+    final a = WordPair("clear", "lake");
+    final b = WordPair("big", "USA");
+    final c = WordPair("better", "PhD");
+    final d = WordPair("huge", "a");
+    expect(a.asSnakeCase, "clear_lake");
+    expect(b.asSnakeCase, "big_USA");
+    expect(c.asSnakeCase, "better_PhD");
+    expect(d.asSnakeCase, "huge_a");
+  });
+
   test('WordPair provides lowercase', () {
     final a = WordPair("clear", "lake");
     final b = WordPair("big", "USA");

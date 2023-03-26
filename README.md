@@ -6,7 +6,7 @@ A package containing the most ~5000 used English words and some utility
 functions.
 
 ## Usage
-
+```dart
 Printing the top 50 most used nouns in the English language:
 
     import 'package:english_words/english_words.dart';
@@ -24,7 +24,7 @@ Computing number of syllables in a word:
 Generating 5 interesting 2-syllable word combinations:
 
     generateWordPairs().take(5).forEach(print);
-
+```
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].

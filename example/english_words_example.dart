@@ -5,4 +5,5 @@ import 'package:english_words/english_words.dart';
 
 void main() {
   generateWordPairs().forEach(print);
+  generateRandomWordsWithLength(6, numWords: 20).forEach(print);
 }

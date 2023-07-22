@@ -91,6 +91,70 @@ Iterable<WordPair> generateWordPairs(
   }
 }
 
+Iterable<WordPair> generateRandomWordsWithLength(int wordLength,
+    {int maxSyllables = maxSyllablesDefault,
+    int top = topDefault,
+    bool safeOnly = safeOnlyDefault,
+    int numWords = 10, // Default to generating 10 words
+    Random? random}) sync* {
+  final rand = random ?? _random;
+
+  bool filterWord(String word) {
+    if (safeOnly && unsafe.contains(word)) return false;
+    return syllables(word) <= maxSyllables - 1;
+  }
+
+  List<String> shortAdjectives;
+  List<String> shortNouns;
+  if (maxSyllables == maxSyllablesDefault &&
+      top == topDefault &&
+      safeOnly == safeOnlyDefault) {
+    // The most common, precomputed case.
+    shortAdjectives = adjectivesMonosyllabicSafe;
+    shortNouns = nounsMonosyllabicSafe;
+  } else {
+    shortAdjectives =
+        adjectives.where(filterWord).take(top).toList(growable: false);
+    shortNouns = nouns.where(filterWord).take(top).toList(growable: false);
+  }
+
+  String pickRandom(List<String> list) => list[rand.nextInt(list.length)];
+
+  int generatedWords = 0; // Keep track of the generated words count.
+
+  // We're in a sync* function, so `while (true)` is okay.
+  // ignore: literal_only_boolean_expressions
+  while (generatedWords < numWords) {
+    String prefix;
+    if (rand.nextBool()) {
+      prefix = pickRandom(shortAdjectives);
+    } else {
+      prefix = pickRandom(shortNouns);
+    }
+    final suffix = pickRandom(shortNouns);
+
+    // Combine the prefix and suffix to create the joined word.
+    final joinedWord = '$prefix$suffix';
+
+    // Skip word combinations that don't have the desired word length.
+    if (joinedWord.length != wordLength) continue;
+
+    // Skip combinations that clash same letters.
+    if (prefix.codeUnits.last == suffix.codeUnits.first) continue;
+
+    // Skip combinations that create an unsafe combinations.
+    if (safeOnly && unsafePairs.contains("$prefix$suffix")) continue;
+
+    final wordPair = WordPair(prefix, suffix);
+    // Skip words that don't make a nicely pronounced 2-syllable word
+    // when combined together.
+    if (syllables(wordPair.join()) > maxSyllables) continue;
+
+    yield wordPair;
+    generatedWords++;
+  }
+}
+
 /// Representation of a combination of 2 words, [first] and [second].
 ///
 /// This is can be also described as a two-part compound (in the linguistic
